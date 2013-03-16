@@ -1,7 +1,7 @@
 name: DragonTravel
 main: eu.phiwa.dt.DragonTravelMain
 author: Phiwa, XemsDoom &ellbristow
-version: 1.8.7.1
+version: 1.8.8
 load: STARTUP
 softdepend: [Vault, SpoutPlugin, AntiCheat]
 permissions:

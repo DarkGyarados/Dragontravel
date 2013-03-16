@@ -23,7 +23,7 @@ import java.util.HashMap;
 import java.util.logging.Logger;
 import net.milkbowl.vault.Vault;
 import net.milkbowl.vault.economy.Economy;
-import net.minecraft.server.v1_4_R1.EntityTypes;
+import net.minecraft.server.v1_5_R1.EntityTypes;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -42,7 +42,7 @@ import org.getspout.spoutapi.sound.SoundManager;
  * 
  * Credits for one year of development go to Luca Moser (moser.luca@gmail.com/)
  * 
- * This file is part of the Bukkit-plugin DragonTravel.
+ * This file is part of the Bukkit-plugin DragonTrave which oyu can find at dev.bukkit.org/server-mods/dragontravel.
  * 
  * DragonTravel is free software: you can redistribute it and/or modify it under
  * the terms of the GNU General Public License as published by the Free Software
