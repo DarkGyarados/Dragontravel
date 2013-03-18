@@ -39,10 +39,16 @@ public class ConfigurationLoader {
 	public boolean checkConfig() {
 
 		if (!(DragonTravelMain.config.getDouble("ConfigVersion") == DragonTravelMain.ver)) {
-			System.out
-					.println("[DragonTravel] Configuration file is outdated!");
-			System.out
-					.println("[DragonTravel] Delete existing configuration file and generate a new one");
+			System.out.println("-------------------------------------------------------");
+			System.out.println("-------------------- [DragonTravel]--------------------");
+			System.out.println("-------------------------------------------------------");
+			System.out.println("[DragonTravel] SERIOUS ERROR!");
+			System.out.println("[DragonTravel] Configuration file is outdated!");
+			System.out.println("[DragonTravel] Delete the existing configuration file");
+			System.out.println("[DragonTravel] and let DragonTravel generate a new one.");
+			System.out.println("-------------------------------------------------------");
+			System.out.println("-------------------------------------------------------");
+			System.out.println("-------------------------------------------------------");
 			return false;
 		} else {
 			DragonTravelMain.config = plugin.getConfig();

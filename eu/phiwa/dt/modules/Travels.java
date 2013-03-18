@@ -71,11 +71,9 @@ public class Travels {
 		notchWorld.addEntity(XemDragon, SpawnReason.CUSTOM);
 		LivingEntity dragon = (LivingEntity) XemDragon.getEntity();
 
-		// Stop checking for fly hack on this player if AntiCheat enabled
-		if (DragonTravelMain.anticheat	&& !net.h31ix.anticheat.api.AnticheatAPI.isExempt(player,
-				net.h31ix.anticheat.manage.CheckType.FLY)) {
-			net.h31ix.anticheat.api.AnticheatAPI.exemptPlayer(player,net.h31ix.anticheat.manage.CheckType.FLY);
-		}
+		
+		exemptPlayerFromCheatChecks(player);
+					
 
 		// Set the player as passenger to the XemDragon
 		dragon.setPassenger(player);
@@ -96,6 +94,7 @@ public class Travels {
 
 	/**
 	 * Dismounts the player from a dragon if mounted on one.
+	 * Only used by command "dt dismount"
 	 * 
 	 * @param player
 	 *            entity which gets dismounted by executing /dt dismount
@@ -112,40 +111,10 @@ public class Travels {
 		XemDragon dragon = DragonTravelMain.TravelInformation.get(player);
 
 		// Get Entity of XemDragon
-		Entity dra = dragon.getEntity();
-		removePlayerandDragon(dra);
-		CommandHandlers.dtpCredit(player);
-
-		// Teleport player to safe location
-		Location clone = player.getLocation().clone();
-		int offset = 1;
-
-		for (;;) {
-
-			while (clone.getBlock().isEmpty() && clone.getY() != 0) {
-				clone.setY(clone.getY() - offset);
-			}
-
-			if (clone.getY() != 0)
-				break;
-
-			clone.setY(256);
-		}
-
-		clone.setY(clone.getY() + 2);
-		player.teleport(clone);
-
-		// Continue checking for fly hack on this player if AntiCheat enabled
-		if (DragonTravelMain.anticheat
-				&& net.h31ix.anticheat.api.AnticheatAPI.isExempt(player,
-						net.h31ix.anticheat.manage.CheckType.FLY)) {
-			net.h31ix.anticheat.api.AnticheatAPI.unexemptPlayer(player,
-					net.h31ix.anticheat.manage.CheckType.FLY);
-		}
-
-		player.sendMessage(MessagesLoader
-				.replaceColors(DragonTravelMain.messages
-						.getString("DismountSuccessful")));
+		removePlayerandDragon(dragon.getEntity());
+		
+		CommandHandlers.dtpCredit(player);		
+		player.sendMessage(MessagesLoader.replaceColors(DragonTravelMain.messages.getString("DismountSuccessful")));
 	}
 
 	/**
@@ -179,24 +148,16 @@ public class Travels {
 
 			clone.setY(256);
 		}
-
-		clone.setY(clone.getY() + 2);
-		player.teleport(clone);
-
-		clone.setY(clone.getY() + 2);
-		player.teleport(clone);
-
+		
 		// Remove dragon from world
 		entity.eject();
 		entity.remove();
+		
+		clone.setY(clone.getY() + 1.2);
+		player.teleport(clone);
 
-		// Continue checking for fly hack on this player if AntiCheat enabled
-		if (DragonTravelMain.anticheat
-				&& net.h31ix.anticheat.api.AnticheatAPI.isExempt(player,
-						net.h31ix.anticheat.manage.CheckType.FLY)) {
-			net.h31ix.anticheat.api.AnticheatAPI.unexemptPlayer(player,
-					net.h31ix.anticheat.manage.CheckType.FLY);
-		}
+		unexemptPlayerFromCheatChecks(player);
+
 	}
 
 	/**
@@ -222,13 +183,7 @@ public class Travels {
 			passed++;
 		}
 
-		// Continue checking for fly hack on this player if AntiCheat enabled
-		if (DragonTravelMain.anticheat
-				&& net.h31ix.anticheat.api.AnticheatAPI.isExempt(player,
-						net.h31ix.anticheat.manage.CheckType.FLY)) {
-			net.h31ix.anticheat.api.AnticheatAPI.unexemptPlayer(player,
-					net.h31ix.anticheat.manage.CheckType.FLY);
-		}
+		unexemptPlayerFromCheatChecks(player);
 
 		// Send "done"-message
 		CommandHandlers.dtpCredit(player);
@@ -519,5 +474,58 @@ public class Travels {
 		dragon.startTravel(loca);
 		player.sendMessage(MessagesLoader.replaceColors(DragonTravelMain.messages.getString("PlayerTravelTo")) + " " + name);
 
+	}
+
+	/** 
+	 * Exempts a player from the Cheat-check of AntiCheat-plugins
+	 *
+	 * @param player
+	 * 				the player to exempt from the check
+	 */
+	private static void exemptPlayerFromCheatChecks(Player player) {
+		// AntiCheat
+		if (DragonTravelMain.anticheat	&& !net.h31ix.anticheat.api.AnticheatAPI
+							.isExempt(player, net.h31ix.anticheat.manage.CheckType.FLY)) {
+			net.h31ix.anticheat.api.AnticheatAPI.exemptPlayer(player,net.h31ix.anticheat.manage.CheckType.FLY);
+		}
+				
+		// NoCheatPlus
+		if (DragonTravelMain.nocheatplus
+				&& !fr.neatmonster.nocheatplus.hooks.NCPExemptionManager
+						.isExempted(player, fr.neatmonster.nocheatplus.checks.CheckType.MOVING_SURVIVALFLY)
+				&& !fr.neatmonster.nocheatplus.hooks.NCPExemptionManager
+						.isExempted(player, fr.neatmonster.nocheatplus.checks.CheckType.MOVING_CREATIVEFLY)
+			) {
+			fr.neatmonster.nocheatplus.hooks.NCPExemptionManager
+							.exemptPermanently(player, fr.neatmonster.nocheatplus.checks.CheckType.MOVING_SURVIVALFLY);
+			fr.neatmonster.nocheatplus.hooks.NCPExemptionManager
+							.exemptPermanently(player, fr.neatmonster.nocheatplus.checks.CheckType.MOVING_CREATIVEFLY);		
+		}	
+	}
+	
+	/** 
+	 * Unexempts a player from the Cheat-check of AntiCheat-plugins
+	 *
+	 * @param player
+	 * 				the player to unexempt from the check
+	 */
+	private static void unexemptPlayerFromCheatChecks(Player player) {
+		// AntiCheat
+		if (DragonTravelMain.anticheat && net.h31ix.anticheat.api.AnticheatAPI
+							.isExempt(player,net.h31ix.anticheat.manage.CheckType.FLY)) {
+			net.h31ix.anticheat.api.AnticheatAPI
+							.unexemptPlayer(player,net.h31ix.anticheat.manage.CheckType.FLY);
+		}
+		
+		// NoCheatPlus
+		if (DragonTravelMain.nocheatplus
+				&& fr.neatmonster.nocheatplus.hooks.NCPExemptionManager
+							.isExempted(player, fr.neatmonster.nocheatplus.checks.CheckType.MOVING_SURVIVALFLY)
+				&& fr.neatmonster.nocheatplus.hooks.NCPExemptionManager
+							.isExempted(player, fr.neatmonster.nocheatplus.checks.CheckType.MOVING_CREATIVEFLY)
+							
+			) {
+			fr.neatmonster.nocheatplus.hooks.NCPExemptionManager.unexempt(player);
+		}
 	}
 }

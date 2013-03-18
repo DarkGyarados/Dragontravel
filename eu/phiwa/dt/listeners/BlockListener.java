@@ -204,7 +204,7 @@ public class BlockListener implements Listener {
 	}
 
 	@EventHandler(priority = EventPriority.LOW)
-	public void onDestinationSignDestory(BlockBreakEvent event) {
+	public void onDestinationSignDestroy(BlockBreakEvent event) {
 
 		Block block = event.getBlock();
 		Player player = event.getPlayer();

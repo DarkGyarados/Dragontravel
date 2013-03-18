@@ -19,8 +19,7 @@ public class MessagesLoader extends JavaPlugin {
 	public boolean checkMessagesFileVersion(double version) {
 		if (version != DragonTravelMain.messagesVer) {
 			System.err.println("[DragonTravel] Messages file is outdated!");
-			System.err
-					.println("[DragonTravel] Delete existing Messages-File and generate a new one");
+			System.err.println("[DragonTravel] Delete existing Messages-File and generate a new one");
 			return false;
 		} else {
 			return true;

@@ -12,6 +12,7 @@ import eu.phiwa.dt.modules.DatabaseLoader;
 import eu.phiwa.dt.modules.FAQLoader;
 import eu.phiwa.dt.modules.MessagesLoader;
 import eu.phiwa.dt.movement.FlightEditor;
+import eu.phiwa.dt.nocheatplus.DragonTravelNoCheatPlus;
 import eu.phiwa.dt.spout.DragonTravelSpout;
 import eu.phiwa.metrics.Metrics;
 import eu.phiwa.mexdb.MexDB;
@@ -42,7 +43,7 @@ import org.getspout.spoutapi.sound.SoundManager;
  * 
  * Credits for one year of development go to Luca Moser (moser.luca@gmail.com/)
  * 
- * This file is part of the Bukkit-plugin DragonTrave which oyu can find at dev.bukkit.org/server-mods/dragontravel.
+ * This file is part of the Bukkit-plugin DragonTrave which you can find at dev.bukkit.org/server-mods/dragontravel
  * 
  * DragonTravel is free software: you can redistribute it and/or modify it under
  * the terms of the GNU General Public License as published by the Free Software
@@ -90,6 +91,9 @@ public class DragonTravelMain extends JavaPlugin {
 
 	// AntiCheat
 	public static boolean anticheat = false;
+	
+	// NoCheatPlus
+	public static boolean nocheatplus = false;
 
 	// DT Dragon
 	public static Double speed;
@@ -229,7 +233,11 @@ public class DragonTravelMain extends JavaPlugin {
 
 		// AntiCheat
 		if (DragonTravelAntiCheat.getAntiCheat())
-			System.out.println("[DragonTravel] AntiCheat support enabled");
+			System.out.println("[DragonTravel] AntiCheat-support enabled");
+		
+		// NoCheatPlus
+		if (DragonTravelNoCheatPlus.getNoCheatPlus())
+			System.out.println("[DragonTravel] NoCheatPlus-support enabled");
 
 		// Economy
 		if (!EconomyEnabled) {

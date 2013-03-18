@@ -322,7 +322,11 @@ public class XemDragon extends EntityEnderDragon {
 		else
 			myZ -= ZTick;
 
-		if ((int) myZ == (int) toZ)
+		if ((int) myZ == (int) toZ
+		  && ((int)myX == (int)toX
+		   || (int)myX == (int)toX+1
+		   || (int)myX == (int)toX-1)	  	
+		  )
 			finalmove = true;
 
 		setPosition(myX, myY, myZ);
