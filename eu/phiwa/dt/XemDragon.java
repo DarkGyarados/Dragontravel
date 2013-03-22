@@ -4,8 +4,8 @@ package eu.phiwa.dt;
 import eu.phiwa.dt.modules.Travels;
 import eu.phiwa.dt.movement.Flight;
 import eu.phiwa.dt.movement.Waypoint;
-import net.minecraft.server.v1_5_R1.EntityEnderDragon;
-import net.minecraft.server.v1_5_R1.World;
+import net.minecraft.server.v1_5_R2.EntityEnderDragon;
+import net.minecraft.server.v1_5_R2.World;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 

@@ -1,5 +1,7 @@
 package eu.phiwa.dt.listeners;
 
+import java.util.ConcurrentModificationException;
+
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -216,32 +218,36 @@ public class BlockListener implements Listener {
 		if (block.getType() != Material.SIGN && block.getType() != Material.SIGN_POST)
 			return;
 
-		for (String name : DragonTravelMain.signs.getIndices()) {
-
-			double x = DragonTravelMain.signs.getDouble(name, "x");
-			double y = DragonTravelMain.signs.getDouble(name, "y");
-			double z = DragonTravelMain.signs.getDouble(name, "z");
-
-			if (!worldname.equalsIgnoreCase(DragonTravelMain.signs.getString(
-					name, "world")))
-				continue;
-
-			World world = block.getWorld();
-			Location compar = new Location(world, x, y, z);
-
-			if (!compar.equals(block.getLocation()))
-				continue;
-
-			if (!(player.hasPermission("dt.travelsigns"))) {
-				player.sendMessage(MessagesLoader.replaceColors(DragonTravelMain.messages.getString("NoPermission")));
-				event.setCancelled(true);
-				break;
+		try {
+			for (String name : DragonTravelMain.signs.getIndices()) {
+	
+				double x = DragonTravelMain.signs.getDouble(name, "x");
+				double y = DragonTravelMain.signs.getDouble(name, "y");
+				double z = DragonTravelMain.signs.getDouble(name, "z");
+	
+				if (!worldname.equalsIgnoreCase(DragonTravelMain.signs.getString(name, "world")))
+					continue;
+	
+				World world = block.getWorld();
+				Location compar = new Location(world, x, y, z);
+	
+				if (!compar.equals(block.getLocation()))
+					continue;
+	
+				if (!(player.hasPermission("dt.travelsigns"))) {
+					player.sendMessage(MessagesLoader.replaceColors(DragonTravelMain.messages.getString("NoPermission")));
+					event.setCancelled(true);
+					break;
+				}
+	
+				CommandHandlers.dtpCredit(player);
+				DragonTravelMain.signs.removeEntry(name);
+				DragonTravelMain.signs.push();
+				player.sendMessage(MessagesLoader.replaceColors(DragonTravelMain.messages.getString("SignRemovedSuccessfully")));
 			}
-
-			CommandHandlers.dtpCredit(player);
-			DragonTravelMain.signs.removeEntry(name);
-			DragonTravelMain.signs.push();
-			player.sendMessage(MessagesLoader.replaceColors(DragonTravelMain.messages.getString("SignRemovedSuccessfully")));
+		}
+		catch(ConcurrentModificationException ex) {
+			
 		}
 	}
 }
