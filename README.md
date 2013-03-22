@@ -2,12 +2,12 @@ Dragontravel
 ============
 
 
-Copyright (C) 2011-2013 Philipp Wagner (mail@phiwa.eu)
-Credits for one year of development go to Luca Moser (moser.luca@gmail.com)
+    Copyright (C) 2011-2013 Philipp Wagner (mail@phiwa.eu)
+    Credits for one year of development go to Luca Moser (moser.luca@gmail.com)
 
-This file is part of the Bukkit-plugin DragonTravel which enables server-admins
-to let players travel by Dragon (yeah, the name already implies that...^^)
-You can find the project itself on BukkitDev at dev.bukkit.org/server-mods/dragontravel
+    This file is part of the Bukkit-plugin DragonTravel which enables server-admins
+    to let players travel by Dragon (yeah, the name already implies that...^^)
+    You can find the project itself on BukkitDev at dev.bukkit.org/server-mods/dragontravel
 
 
 
@@ -30,13 +30,9 @@ You can find the project itself on BukkitDev at dev.bukkit.org/server-mods/drago
 
 -------------------------------------------------------------------------------------------
 
-
-
--------------------------------------------------------------------------------------------
-
-  >>>> A LITTLE MESSAGE TO ANYONE USING PARTS OF DragonTravel IN ANY OTHER PROJECT: <<<<
+    >>>> A LITTLE MESSAGE TO ANYONE USING PARTS OF DragonTravel IN ANY OTHER PROJECT: <<<<
   
-  Even though it is not obligatory, it would be nice if you could add a notice
-  linking to this project (GitHub and/or BukkitDev) in the README of you project. :)
+    Even though it is not obligatory, it would be nice if you could add a notice
+    linking to this project (GitHub and/or BukkitDev) in the README of you project. :)
 
--------------------------------------------------------------------------------------------
+
