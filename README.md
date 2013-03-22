@@ -2,6 +2,7 @@ Dragontravel
 ============
 
 
+                        >>>> GENERAL INFORMATION  <<<<<
     Copyright (C) 2011-2013 Philipp Wagner (mail@phiwa.eu)
     Credits for one year of development go to Luca Moser (moser.luca@gmail.com)
 
