@@ -34,6 +34,6 @@ Dragontravel
     >>>> A LITTLE MESSAGE TO ANYONE USING PARTS OF DragonTravel IN ANY OTHER PROJECT: <<<<
   
     Even though it is not obligatory, it would be nice if you could add a notice
-    linking to this project (GitHub and/or BukkitDev) in the README of you project. :)
+    linking to this project (GitHub and/or BukkitDev) in the README of your project. :)
 
 
